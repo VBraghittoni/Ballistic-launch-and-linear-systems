@@ -36,10 +36,12 @@ namespace Circuitos_e_movimentos
             Console.WriteLine("Alerta: mantenha suas unidades para você. Acharemos resultados nas unidades em que os valores inseridos estão.");
             Console.WriteLine("Digite 1 para circuitos elétricos ou 2 movimentos.");
             int option = Convert.ToInt32(Console.ReadLine());
+            
             if(option == 1)
             {
 
             }
+
             if (option == 2)
             {
                 Console.WriteLine("Digite 1 para M.R.U. ou 2 para M.R.U.V.");
