@@ -32,7 +32,7 @@ namespace Circuitos_e_movimentos
                 }
                 return result;
             }
-
+            //teste
             Console.WriteLine("Alerta: mantenha suas unidades para você. Acharemos resultados nas unidades em que os valores inseridos estão.");
             Console.WriteLine("Digite 1 para circuitos elétricos ou 2 movimentos.");
             int option = Convert.ToInt32(Console.ReadLine());
