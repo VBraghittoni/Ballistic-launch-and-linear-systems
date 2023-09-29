@@ -62,39 +62,38 @@ namespace Circuitos_e_movimentos
                             if (ContaIndefinidos(array) != 1)
                             {
                                 Console.WriteLine("Não foi possível achar valores adicionais com as suas informações. Insira mais valores.");
+                            } else{
+                                float[] arrayNumeros = new float[array.Length];
+    
+                                for (int i = 0; i < array.Length; i++)
+                                {
+                                    arrayNumeros[i] = Convert.ToInt32(array[i]);
+    
+                                }
+    
+                                if (!Definido(array[0]))
+                                {
+                                    arrayNumeros[0] = arrayNumeros[1] - arrayNumeros[2]*arrayNumeros[3];
+                                    Console.WriteLine("A posição inicial é {0}", arrayNumeros[0]);
+                                }
+    
+                                if (!Definido(array[1]))
+                                {
+                                    arrayNumeros[1] = arrayNumeros[0] + arrayNumeros[2] * arrayNumeros[3];
+                                    Console.WriteLine("A posição final é {0}", arrayNumeros[1]);
+                                }
+    
+                                if (!Definido(array[2]))
+                                {
+                                    arrayNumeros[2] = (arrayNumeros[1] - arrayNumeros[0]) / arrayNumeros[3];
+                                    Console.WriteLine("A velocidade durante o movimento foi de {0}", arrayNumeros[2]);
+                                }
+                                if (!Definido(array[3]))
+                                {
+                                    arrayNumeros[3] = (arrayNumeros[1] - arrayNumeros[0]) / arrayNumeros[2];
+                                    Console.WriteLine("A velocidade durante o movimento foi de {0}", arrayNumeros[3]);
+                                }
                             }
-
-                            float[] arrayNumeros = new float[array.Length];
-
-                            for (int i = 0; i < array.Length; i++)
-                            {
-                                arrayNumeros[i] = Convert.ToInt32(array[i]);
-
-                            }
-
-                            if (!Definido(array[0]))
-                            {
-                                arrayNumeros[0] = arrayNumeros[1] - arrayNumeros[2]*arrayNumeros[3];
-                                Console.WriteLine("A posição inicial é {0}", arrayNumeros[0]);
-                            }
-
-                            if (!Definido(array[1]))
-                            {
-                                arrayNumeros[1] = arrayNumeros[0] + arrayNumeros[2] * arrayNumeros[3];
-                                Console.WriteLine("A posição final é {0}", arrayNumeros[1]);
-                            }
-
-                            if (!Definido(array[2]))
-                            {
-                                arrayNumeros[2] = (arrayNumeros[1] - arrayNumeros[0]) / arrayNumeros[3];
-                                Console.WriteLine("A velocidade durante o movimento foi de {0}", arrayNumeros[2]);
-                            }
-                            if (!Definido(array[3]))
-                            {
-                                arrayNumeros[3] = (arrayNumeros[1] - arrayNumeros[0]) / arrayNumeros[2];
-                                Console.WriteLine("A velocidade durante o movimento foi de {0}", arrayNumeros[3]);
-                            }
-
 
 
                         }
