@@ -9,32 +9,21 @@ namespace Circuitos_e_movimentos
     internal class Program
     {
 
+
         static void Main(string[] args)
         {
-            bool Definido(string n)
-            {
-                if (n == null)
-                {
-                    return false;
-                }
-                return true;
-            }
 
-            int ContaIndefinidos(string[] array)
-            {
-                int result = 0;
-                for (int i = 0; i < array.Length; i++)
-                {
-                    if (!Definido(array[i]))
-                    {
-                        result++;
-                    }
-                }
+    
+
+            float[] formulaQuadratica(float a, float b, float c){
+                float[] result = new int[2];
+                result[0] = (-b+Math.Sqrt(b*b-4*a*c))/2*a
+                result[1] = (-b-Math.Sqrt(b*b-4*a*c))/2*a
                 return result;
             }
-            
-            Console.WriteLine("Alerta: mantenha suas unidades para você. Acharemos resultados nas unidades em que os valores inseridos estão.");
-            Console.WriteLine("Digite 1 para circuitos elétricos ou 2 movimentos.");
+
+            Console.WriteLine("Alerta: mantenha suas unidades para você. Acharemos resultados nas unidades em que os valores inseridos estão.\n");
+            Console.WriteLine("Digite 1 para circuitos elétricos ou 2 lançamento balístico.");
             int option = Convert.ToInt32(Console.ReadLine());
             
             if(option == 1)
@@ -43,210 +32,54 @@ namespace Circuitos_e_movimentos
             }
 
             if (option == 2)
-            {
-                Console.WriteLine("Digite 1 para M.R.U. ou 2 para M.R.U.V.");
-                int option2 = Convert.ToInt32(Console.ReadLine());
-                if (option2 == 1)
+            {      
+
+                Console.WriteLine("Digite o valor da distância horizontal (X): ");
+                float x = Convert.ToSingle(Console.ReadLine());
+
+                Console.WriteLine("Digite o valor da distância vertical (H): ");
+                float h = Convert.ToSingle(Console.ReadLine());
+
+                float boundRadianos = Atan(j/x);
+                float boundGraus = bound*180/Math.PI;
+                float angulo;
+                float aceleracaoGravitacional = 9.8;
+
+
+                Console.WrieLine("Vamos inserir o valor do ângulo.\n Ele deve ser menor que (π/2) radianos = 90º e maior que {0} radianos = {1}º.", boundRadianos, boundGraus);
+
+                Console.WriteLine("Digite 1 para digitar o ângulo em radianos e 2 para digitar o ângulo em graus;");
+                int option = Convert.ToInt32(Console.ReadLine());
+
+                while(true)
                 {
-                    Console.WriteLine("Hora de inserir as variáveis!");
-
-                    string[] array = new string[4];
-
-                    while (true)
-                    {
-                        Console.WriteLine("Qual variável deseja inserir? Digite: \n 1 - Posição inicial \n 2 - Posição final \n 3 - Velocidade \n 4 - Tempo decorrido \n 5 - Cansei de inserir variáveis! Me mostra os resultados!!");
-                        int option3 = Convert.ToInt32(Console.ReadLine());
-                        if (option3 == 5)
-                        {
-
-                            if (ContaIndefinidos(array) != 1)
-                            {
-                                Console.WriteLine("Não foi possível achar valores adicionais com as suas informações. Insira mais valores.");
-                            } else{
-                                float[] arrayNumeros = new float[array.Length];
-    
-                                for (int i = 0; i < array.Length; i++)
-                                {
-                                    arrayNumeros[i] = Convert.ToInt32(array[i]);
-    
-                                }
-    
-                                if (!Definido(array[0]))
-                                {
-                                    arrayNumeros[0] = arrayNumeros[1] - arrayNumeros[2]*arrayNumeros[3];
-                                    Console.WriteLine("A posição inicial é {0}", arrayNumeros[0]);
-                                }
-    
-                                if (!Definido(array[1]))
-                                {
-                                    arrayNumeros[1] = arrayNumeros[0] + arrayNumeros[2] * arrayNumeros[3];
-                                    Console.WriteLine("A posição final é {0}", arrayNumeros[1]);
-                                }
-    
-                                if (!Definido(array[2]))
-                                {
-                                    arrayNumeros[2] = (arrayNumeros[1] - arrayNumeros[0]) / arrayNumeros[3];
-                                    Console.WriteLine("A velocidade durante o movimento foi de {0}", arrayNumeros[2]);
-                                }
-                                if (!Definido(array[3]))
-                                {
-                                    arrayNumeros[3] = (arrayNumeros[1] - arrayNumeros[0]) / arrayNumeros[2];
-                                    Console.WriteLine("A velocidade durante o movimento foi de {0}", arrayNumeros[3]);
-                                }
-                            }
-
-
+                    if(option==1){
+                        Console.WriteLine("Digite o ângulo em radianos: ");
+                        float tentativa = Convert.ToSingle(Console.ReadLine());
+                        if(boundRadianos<tentativa && tentativa<Math.PI){
+                            angulo = tentativa;
+                            break;
+                        } else{
+                            Console.WriteLine("Ângulo inválido. Tente novamente.")
                         }
-                        Console.WriteLine("Digite o valor: ");
-                        string valorRecebido = Console.ReadLine();
-                        bool sucesso = float.TryParse(valorRecebido, out float numero);
-
-                        if (sucesso)
-                        {
-                            switch (option3)
-                            {
-                                case 1:
-                                    array[0] = valorRecebido;
-                                    break;
-                                case 2:
-                                    array[1] = valorRecebido;
-                                    break;
-                                case 3:
-                                    if (valorRecebido == "0")
-                                    {
-                                        Console.WriteLine("Erro! Sem velocidade, não há movimento!!");
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        array[2] = valorRecebido;
-                                        break;
-                                    }
-
-                                case 4:
-                                    if (valorRecebido == "0")
-                                    {
-                                        Console.WriteLine("Erro! Sem tempo, não há movimento!!");
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        array[3] = valorRecebido;
-                                        break;
-                                    }
-                                default:
-                                    Console.WriteLine("Opção inválida.");
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("O que foi digitado não pode ser convertido para número. Use somente algarismos de 0 a 9.");
-                        }
-
+                    }
+                    if(option==2){
+                        Console.WriteLine("Digite o ângulo em graus: ");
+                        float tentativa = Convert.ToSingle(Console.ReadLine());
+                        if(boundGraus<tentativa && tentativa<180){
+                            angulo = Math.PI*tentativa/180;
+                            break;
+                        } else{
+                            Console.WriteLine("Ângulo inválido. Tente novamente.")
+                        }                        
                     }
                 }
-                if (option2 == 2)
-                {
-                    Console.WriteLine("Hora de inserir as variáveis!");
-
-                    string[] array = new string[4];
-
-                    while (true)
-                    {
-                        Console.WriteLine("Qual variável deseja inserir? Digite: \n 1 - Posição inicial \n 2 - Posição final \n 3 - Velocidade média \n 4 - Velocidade inicial \n 5- Velocidade final \n 6 - Tempo decorrido \n 7 - Espaço percorrido \n 8 - Aceleração \n 9 - Cansei de inserir variáveis! Me mostra os resultados!!");
-                        int option3 = Convert.ToInt32(Console.ReadLine());
-                        if (option3 == 9)
-                        {
-
-                            if (ContaIndefinidos(array) != 1)
-                            {
-                                Console.WriteLine("Não foi possível achar valores adicionais com as suas informações. Insira mais valores.");
-                            }
-
-                            float[] arrayNumeros = new float[array.Length];
-
-                            for (int i = 0; i < array.Length; i++)
-                            {
-                                arrayNumeros[i] = Convert.ToInt32(array[i]);
-
-                            }
-
-                            if (!Definido(array[0]))
-                            {
-                                arrayNumeros[0] = arrayNumeros[1] - arrayNumeros[2] * arrayNumeros[3];
-                                Console.WriteLine("A posição inicial é {0}", arrayNumeros[0]);
-                            }
-
-                            if (!Definido(array[1]))
-                            {
-                                arrayNumeros[1] = arrayNumeros[0] + arrayNumeros[2] * arrayNumeros[3];
-                                Console.WriteLine("A posição final é {0}", arrayNumeros[1]);
-                            }
-
-                            if (!Definido(array[2]))
-                            {
-                                arrayNumeros[2] = (arrayNumeros[1] - arrayNumeros[0]) / arrayNumeros[3];
-                                Console.WriteLine("A velocidade durante o movimento foi de {0}", arrayNumeros[2]);
-                            }
-                            if (!Definido(array[3]))
-                            {
-                                arrayNumeros[3] = (arrayNumeros[1] - arrayNumeros[0]) / arrayNumeros[2];
-                                Console.WriteLine("A velocidade durante o movimento foi de {0}", arrayNumeros[3]);
-                            }
 
 
 
-                        }
-                        Console.WriteLine("Digite o valor: ");
-                        string valorRecebido = Console.ReadLine();
-                        bool sucesso = float.TryParse(valorRecebido, out float numero);
 
-                        if (sucesso)
-                        {
-                            switch (option3)
-                            {
-                                case 1:
-                                    array[0] = valorRecebido;
-                                    break;
-                                case 2:
-                                    array[1] = valorRecebido;
-                                    break;
-                                case 3:
-                                    if (valorRecebido == "0")
-                                    {
-                                        Console.WriteLine("Erro! Sem velocidade, não há movimento!!");
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        array[2] = valorRecebido;
-                                        break;
-                                    }
+                
 
-                                case 4:
-                                    if (valorRecebido == "0")
-                                    {
-                                        Console.WriteLine("Erro! Sem tempo, não há movimento!!");
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        array[3] = valorRecebido;
-                                        break;
-                                    }
-                                default:
-                                    Console.WriteLine("Opção inválida.");
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("O que foi digitado não pode ser convertido para número. Use somente algarismos de 0 a 9.");
-                        }
-
-                    }
-                }
             }
 
             Console.ReadKey();
