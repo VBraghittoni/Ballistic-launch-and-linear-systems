@@ -64,19 +64,24 @@ namespace Circuitos_e_movimentos
                         Console.WriteLine("O valor não é um número. Tente novamente.")
                     }
                 } 
+
+                Console.WriteLine("Baseando-se nas distâncias passadas, sabemos que o valor do ângulo deve ser menor que (π/2) radianos = 90° e maior que {0} radianos = {1}°.", boundRadianos, boundGraus);
+
+
+                //Essa parte está errada
                 if(g*x*x/2 > h)
                 {
-                    Console.WriteLine("O alvo será atingido quando o projétil estiver em movimento ascendente.");
+                    Console.WriteLine("Caso você insira um ângulo válido, o alvo será atingido quando o projétil estiver em movimento ascendente.");
                 }
 
                 if(g*x*x/2 == h)
                 {
-                    Console.WriteLine("O alvo será atingido quando o projétil estiver no pico de sua altura.");
+                    Console.WriteLine("Caso você insira um ângulo válido, o alvo será atingido quando o projétil estiver no pico de sua altura.");
                 }
 
                 if(g*x*x/2 < h)
                 {
-                    Console.WriteLine("O alvo será atingido quando o projétil estiver em movimento descendente.");
+                    Console.WriteLine("Caso você insira um ângulo válido, o alvo será atingido quando o projétil estiver em movimento descendente.");
                 }
 
 
@@ -85,8 +90,6 @@ namespace Circuitos_e_movimentos
                 float angulo;
                 
 
-
-                Console.WrieLine("Vamos inserir o valor do ângulo.\n Ele deve ser menor que (π/2) radianos = 90º e maior que {0} radianos = {1}º.", boundRadianos, boundGraus);
 
                 Console.WriteLine("Digite 1 para digitar o ângulo em radianos e 2 para digitar o ângulo em graus;");
                 int option = Convert.ToInt32(Console.ReadLine());
@@ -119,7 +122,8 @@ namespace Circuitos_e_movimentos
 
                 float v0 = x/(Math.Cos(angulo)*t);       
 
-                Console.WriteLine("A velocidade inicial necessária é {0}, e sua duração de tempo para acontecer é {1}", t, v0);
+                Console.WriteLine("A velocidade inicial necessária é {0}, e sua duração de tempo para acontecer é {1}\n\n A equação que ilustra esse movimento é y = x.{2} + x.x.({3})", t, v0,(Math.Sin(angulo)/Math.Cos(angulo)),(-g/(2*v0*v0*Math.Cos(angulo)*Math.Cos(angulo))));
+
 
             }
 
