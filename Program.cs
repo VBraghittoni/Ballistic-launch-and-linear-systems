@@ -68,22 +68,6 @@ namespace Circuitos_e_movimentos
                 Console.WriteLine("Baseando-se nas distâncias passadas, sabemos que o valor do ângulo deve ser menor que (π/2) radianos = 90° e maior que {0} radianos = {1}°.", boundRadianos, boundGraus);
 
 
-                //Essa parte está errada
-                if(g*x*x/2 > h)
-                {
-                    Console.WriteLine("Caso você insira um ângulo válido, o alvo será atingido quando o projétil estiver em movimento ascendente.");
-                }
-
-                if(g*x*x/2 == h)
-                {
-                    Console.WriteLine("Caso você insira um ângulo válido, o alvo será atingido quando o projétil estiver no pico de sua altura.");
-                }
-
-                if(g*x*x/2 < h)
-                {
-                    Console.WriteLine("Caso você insira um ângulo válido, o alvo será atingido quando o projétil estiver em movimento descendente.");
-                }
-
 
                 float boundRadianos = Math.Atan(j/x);
                 float boundGraus = bound*180/Math.PI;
@@ -123,6 +107,20 @@ namespace Circuitos_e_movimentos
                 float v0 = x/(Math.Cos(angulo)*t);       
 
                 Console.WriteLine("A velocidade inicial necessária é {0}, e sua duração de tempo para acontecer é {1}\n\n A equação que ilustra esse movimento é y = x.{2} + x.x.({3})", t, v0,(Math.Sin(angulo)/Math.Cos(angulo)),(-g/(2*v0*v0*Math.Cos(angulo)*Math.Cos(angulo))));
+
+                v0y = v0*<Math.Sin(angulo);
+
+
+
+                if((v0y-g*t) > 0){
+                    Console.WriteLine("Considerando tal velocidade, o projétil estará subindo quando acertar o alvo")
+                }
+                if((v0y-g*t) == 0){
+                    Console.WriteLine("Considerando tal velocidade, o projétil estará em pico quando acertar o alvo")
+                }
+                if((v0y-g*t) < 0){
+                    Console.WriteLine("Considerando tal velocidade, o projétil estará caindo quando acertar o alvo")
+                }
 
 
             }
