@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,121 +8,134 @@ namespace Circuitos_e_movimentos
 {
     internal class Program
     {
-
-
         static void Main(string[] args)
         {
 
-    
-
-            float[] formulaQuadratica(float a, float b, float c){
-                float[] result = new int[2];
-                result[0] = (-b+Math.Sqrt(b*b-4*a*c))/2*a
-                result[1] = (-b-Math.Sqrt(b*b-4*a*c))/2*a
-                return result;
-            }
-
-            Console.WriteLine("Alerta: mantenha suas unidades para você. Acharemos resultados nas unidades em que os valores inseridos estão.\n");
+            Console.WriteLine("Alerta: mantenha suas unidades para você. Acharemos resultados nas unidades em que os valores inseridos estão.");
             Console.WriteLine("Digite 1 para circuitos elétricos ou 2 lançamento balístico.");
-            int option = Convert.ToInt32(Console.ReadLine());
-            
-            if(option == 1)
+            string option = Console.ReadLine();
+            double x = 0;
+            double h = 0;
+
+            //Elétrica:
+            if (option == "1")
             {
 
             }
 
+            //Física:
             else
-            {      
-                float g = 9.8;
+            {
+                double g = 9.8;
 
-                while(true)
+                while (true)
                 {
                     Console.WriteLine("Digite o valor da distância horizontal (X): ");
-                    try{
-                       float x = Convert.ToSingle(Console.ReadLine());
-                        if(x > 0){
+                    try
+                    {
+                        x = Convert.ToSingle(Console.ReadLine());
+                        if (x > 0)
+                        {
                             break;
-                        } else{
-                            Console.WriteLine("O valor precisa ser maior que 0. Tente novamente.")
                         }
-                    }catch{
-                        Console.WriteLine("O valor não é um número. Tente novamente.")
+                        else
+                        {
+                            Console.WriteLine("O valor precisa ser maior que 0. Tente novamente.");
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("O valor não é um número. Tente novamente.");
                     }
                 }
 
-                while(true)
+                while (true)
                 {
                     Console.WriteLine("Digite o valor da distância vertical (H): ");
-                    try{
-                       float h = Convert.ToSingle(Console.ReadLine());
-                        if(h > 0){
+                    try
+                    {
+                        h = Convert.ToSingle(Console.ReadLine());
+                        if (h > 0)
+                        {
                             break;
-                        } else{
-                            Console.WriteLine("O valor precisa ser maior que 0. Tente novamente.")
                         }
-                    }catch{
-                        Console.WriteLine("O valor não é um número. Tente novamente.")
+                        else
+                        {
+                            Console.WriteLine("O valor precisa ser maior que 0. Tente novamente.");
+                        }
                     }
-                } 
+                    catch
+                    {
+                        Console.WriteLine("O valor não é um número. Tente novamente.");
+                    }
+                }
 
-                Console.WriteLine("Baseando-se nas distâncias passadas, sabemos que o valor do ângulo deve ser menor que (π/2) radianos = 90° e maior que {0} radianos = {1}°.", boundRadianos, boundGraus);
+                double boundRadianos = Math.Atan(h / x);
+                double boundGraus = (boundRadianos * 180) / Math.PI;
+                double angulo;
+                Console.WriteLine($"Baseando-se nas distâncias passadas, sabemos que o valor do ângulo deve ser \nmenor que (π/2) radianos = 90° \nmaior que: {boundRadianos} OU radianos = {boundGraus}°.");
 
+                Console.WriteLine("Digite 1 para digitar o ângulo em radianos e 2 para digitar o ângulo em graus: ");
+                string option1 = Console.ReadLine();
 
-
-                float boundRadianos = Math.Atan(j/x);
-                float boundGraus = bound*180/Math.PI;
-                float angulo;
-                
-
-
-                Console.WriteLine("Digite 1 para digitar o ângulo em radianos e 2 para digitar o ângulo em graus;");
-                int option = Convert.ToInt32(Console.ReadLine());
-
-                while(true)
+                while (true)
                 {
-                    if(option==1){
+                    if (option1 == "1")
+                    {
                         Console.WriteLine("Digite o ângulo em radianos: ");
-                        float tentativa = Convert.ToSingle(Console.ReadLine());
-                        if(boundRadianos<tentativa && tentativa<Math.PI){
+                        double tentativa = Convert.ToSingle(Console.ReadLine());
+                        if (boundRadianos < tentativa && tentativa < Math.PI)
+                        {
                             angulo = tentativa;
                             break;
-                        } else{
-                            Console.WriteLine("Ângulo inválido. Tente novamente.")
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ângulo inválido. Tente novamente.");
                         }
                     }
-                    else{
+                    else if (option1 == "2")
+                    {
                         Console.WriteLine("Digite o ângulo em graus: ");
-                        float tentativa = Convert.ToSingle(Console.ReadLine());
-                        if(boundGraus<tentativa && tentativa<180){
-                            angulo = Math.PI*tentativa/180;
+                        double tentativa = Convert.ToSingle(Console.ReadLine());
+                        if (boundGraus < tentativa && tentativa < 180)
+                        {
+                            angulo = Math.PI * tentativa / 180;
                             break;
-                        } else{
-                            Console.WriteLine("Ângulo inválido. Tente novamente.")
-                        }                        
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ângulo inválido. Tente novamente.");
+                        }
+                    }
+                    else
+                    {
+
                     }
                 }
 
-                float t = Math.Sqrt(((x*Math.Sin(angulo)/Math.Cos(angulo))-h)/4.9);
+                double t = Math.Sqrt(((x * Math.Sin(angulo) / Math.Cos(angulo)) - h) / 4.9);
 
-                float v0 = x/(Math.Cos(angulo)*t);       
+                double v0 = x / (Math.Cos(angulo) * t);
 
-                Console.WriteLine("A velocidade inicial necessária é {0}, e sua duração de tempo para acontecer é {1}\n\n A equação que ilustra esse movimento é y = x.{2} + x.x.({3})", t, v0,(Math.Sin(angulo)/Math.Cos(angulo)),(-g/(2*v0*v0*Math.Cos(angulo)*Math.Cos(angulo))));
+                Console.WriteLine("A velocidade inicial necessária é {0} e sua duração de tempo para acontecer é {1}\n\nA equação que ilustra esse movimento é y = x*({2}) + x^2*({3})", t, v0, (Math.Sin(angulo) / Math.Cos(angulo)), (-g / (2 * v0 * v0 * Math.Cos(angulo) * Math.Cos(angulo))));
 
-                v0y = v0*<Math.Sin(angulo);
+                double v0y = v0 * Math.Sin(angulo);
 
 
 
-                if((v0y-g*t) > 0){
-                    Console.WriteLine("Considerando tal velocidade, o projétil estará subindo quando acertar o alvo")
+                if ((v0y - g * t) > 0)
+                {
+                    Console.WriteLine("Considerando tal velocidade, o projétil estará subindo quando acertar o alvo");
                 }
-                if((v0y-g*t) == 0){
-                    Console.WriteLine("Considerando tal velocidade, o projétil estará em pico quando acertar o alvo")
+                if ((v0y - g * t) == 0)
+                {
+                    Console.WriteLine("Considerando tal velocidade, o projétil estará em pico quando acertar o alvo");
                 }
-                if((v0y-g*t) < 0){
-                    Console.WriteLine("Considerando tal velocidade, o projétil estará caindo quando acertar o alvo")
+                if ((v0y - g * t) < 0)
+                {
+                    Console.WriteLine("Considerando tal velocidade, o projétil estará caindo quando acertar o alvo");
                 }
-
-
             }
 
             Console.ReadKey();
