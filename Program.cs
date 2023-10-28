@@ -14,18 +14,74 @@ namespace Circuitos_e_movimentos
             Console.WriteLine("Alerta: mantenha suas unidades para você. Acharemos resultados nas unidades em que os valores inseridos estão.");
             Console.WriteLine("Digite 1 para circuitos elétricos ou 2 lançamento balístico.");
             string option = Console.ReadLine();
-            double x = 0;
-            double h = 0;
+
 
             //Elétrica:
             if (option == "1")
             {
+
+                Console.WriteLine("Resolução de sistemas de equações lineares para multimalhas em elétrica");
+                
+                Console.Write("Quantas equações você deseja inserir? ");
+                int numEquacoes = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Aviso: o coeficiente de formato Akk (linha = coluna) precisará ser diferente de 0. \nPortanto, a enésima equação não deverá ter seu enésimo coeficiente sendo nulo.\n Insira as suas equações em uma ordem que satisfaça essa exigência.");
+                
+                double[,] sistema = new double[numEquacoes, numEquacoes + 1];
+
+                for (int i = 0; i < numEquacoes; i++)
+                {
+                    for (int j = 0; j < numEquacoes + 1; j++)
+                    {
+                        Console.Write($"Insira o valor do coeficiente A[{i + 1}{j + 1}]: ");
+                        sistema[i, j] = double.Parse(Console.ReadLine());
+                    }
+                }
+
+                // Resolvendo o sistema de equações usando eliminação de Gauss
+                for (int i = 0; i < numEquacoes; i++)
+                {
+                    double pivot = sistema[i, i];
+                    if (pivot == 0)
+                    {
+                        Console.WriteLine("O pivô não pode ser zero.\n Uma das duas situações ocorreu: \n1- Algum coeficiente no formato Akk foi colocado como 0 \n2-Suas equações tinham informações redundantes \nO programa irá encerrar.");
+                        Console.ReadKey();
+                        return;
+                    }
+
+                    for (int j = i; j < numEquacoes + 1; j++)
+                    {
+                        sistema[i, j] /= pivot;
+                    }
+
+                    for (int k = 0; k < numEquacoes; k++)
+                    {
+                        if (k != i)
+                        {
+                            double factor = sistema[k, i];
+                            for (int j = i; j < numEquacoes + 1; j++)
+                            {
+                                sistema[k, j] -= factor * sistema[i, j];
+                            }
+                        }
+                    }
+                }
+
+                // Exibir as soluções
+                Console.WriteLine("\nSolução:");
+                for (int i = 0; i < numEquacoes; i++)
+                {
+                    Console.WriteLine($"A[{i + 1}] = {sistema[i, numEquacoes]:F4}");
+                }
 
             }
 
             //Física:
             else
             {
+
+                double x = 0;
+                double h = 0;
                 double g = 9.8;
 
                 while (true)
@@ -114,7 +170,7 @@ namespace Circuitos_e_movimentos
                     }
                 }
 
-                double t = Math.Sqrt(((x * Math.Sin(angulo) / Math.Cos(angulo)) - h) / 4.9);
+                double t = Math.Sqrt(((x * Math.Sin(angulo) / Math.Cos(angulo)) - h) / (g/2));
 
                 double v0 = x / (Math.Cos(angulo) * t);
 
