@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Circuitos_e_movimentos
+namespace SistemaLinearELancamentoBalistico
 {
     internal class Program
     {
         static void Main(string[] args)
         {
 
-            Console.WriteLine("Alerta: mantenha suas unidades para você. Acharemos resultados nas unidades em que os valores inseridos estão.");
-            Console.WriteLine("Digite 1 para circuitos elétricos ou 2 lançamento balístico.");
-            string option = Console.ReadLine();
+            Console.WriteLine("Alerta: mantenha suas unidades para você. Acharemos resultados nas unidades em que os valores inseridos estão.\n\n");
+            Console.WriteLine("Digite 1 para resolvermos sistemas lineares ou 2 para lançamento balístico.");
+            string opcao1 = Console.ReadLine();
 
 
             //Elétrica:
-            if (option == "1")
+            if (opcao1 == "1")
             {
 
                 Console.WriteLine("Resolução de sistemas de equações lineares para multimalhas em elétrica");
@@ -41,8 +41,8 @@ namespace Circuitos_e_movimentos
                 // Resolvendo o sistema de equações usando eliminação de Gauss
                 for (int i = 0; i < numEquacoes; i++)
                 {
-                    double pivot = sistema[i, i];
-                    if (pivot == 0)
+                    double pivo = sistema[i, i];
+                    if (pivo == 0)
                     {
                         Console.WriteLine("O pivô não pode ser zero.\n Uma das duas situações ocorreu: \n1- Algum coeficiente no formato Akk foi colocado como 0 \n2-Suas equações tinham informações redundantes \nO programa irá encerrar.");
                         Console.ReadKey();
@@ -51,17 +51,17 @@ namespace Circuitos_e_movimentos
 
                     for (int j = i; j < numEquacoes + 1; j++)
                     {
-                        sistema[i, j] /= pivot;
+                        sistema[i, j] /= pivo;
                     }
 
                     for (int k = 0; k < numEquacoes; k++)
                     {
                         if (k != i)
                         {
-                            double factor = sistema[k, i];
+                            double fator = sistema[k, i];
                             for (int j = i; j < numEquacoes + 1; j++)
                             {
-                                sistema[k, j] -= factor * sistema[i, j];
+                                sistema[k, j] -= fator * sistema[i, j];
                             }
                         }
                     }
@@ -86,7 +86,7 @@ namespace Circuitos_e_movimentos
 
                 while (true)
                 {
-                    Console.WriteLine("Digite o valor da distância horizontal (X): ");
+                    Console.WriteLine("Digite o valor da distância horizontal do alvo (X): ");
                     try
                     {
                         x = Convert.ToSingle(Console.ReadLine());
@@ -107,7 +107,7 @@ namespace Circuitos_e_movimentos
 
                 while (true)
                 {
-                    Console.WriteLine("Digite o valor da distância vertical (H): ");
+                    Console.WriteLine("Digite o valor da distância vertical do alvo (H): ");
                     try
                     {
                         h = Convert.ToSingle(Console.ReadLine());
@@ -126,21 +126,21 @@ namespace Circuitos_e_movimentos
                     }
                 }
 
-                double boundRadianos = Math.Atan(h / x);
-                double boundGraus = (boundRadianos * 180) / Math.PI;
+                double minRadianos = Math.Atan(h / x);
+                double minGraus = (minRadianos * 180) / Math.PI;
                 double angulo;
-                Console.WriteLine($"Baseando-se nas distâncias passadas, sabemos que o valor do ângulo deve ser \nmenor que (π/2) radianos = 90° \nmaior que: {boundRadianos} OU radianos = {boundGraus}°.");
+                Console.WriteLine($"Baseando-se nas distâncias passadas, sabemos que o valor do ângulo deve ser \nmenor que (π/2) radianos = 90° \nmaior que: {minRadianos} OU radianos = {minGraus}°.");
 
                 Console.WriteLine("Digite 1 para digitar o ângulo em radianos e 2 para digitar o ângulo em graus: ");
-                string option1 = Console.ReadLine();
+                string opcao2 = Console.ReadLine();
 
                 while (true)
                 {
-                    if (option1 == "1")
+                    if (opcao2 == "1")
                     {
                         Console.WriteLine("Digite o ângulo em radianos: ");
                         double tentativa = Convert.ToSingle(Console.ReadLine());
-                        if (boundRadianos < tentativa && tentativa < Math.PI)
+                        if (minRadianos < tentativa && tentativa < Math.PI)
                         {
                             angulo = tentativa;
                             break;
@@ -150,11 +150,11 @@ namespace Circuitos_e_movimentos
                             Console.WriteLine("Ângulo inválido. Tente novamente.");
                         }
                     }
-                    else if (option1 == "2")
+                    else
                     {
                         Console.WriteLine("Digite o ângulo em graus: ");
                         double tentativa = Convert.ToSingle(Console.ReadLine());
-                        if (boundGraus < tentativa && tentativa < 180)
+                        if (minGraus < tentativa && tentativa < 180)
                         {
                             angulo = Math.PI * tentativa / 180;
                             break;
@@ -163,10 +163,6 @@ namespace Circuitos_e_movimentos
                         {
                             Console.WriteLine("Ângulo inválido. Tente novamente.");
                         }
-                    }
-                    else
-                    {
-
                     }
                 }
 
