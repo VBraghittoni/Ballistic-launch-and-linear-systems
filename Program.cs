@@ -26,6 +26,8 @@ namespace SistemaLinearELancamentoBalistico
                 int numEquacoes = int.Parse(Console.ReadLine());
 
                 Console.WriteLine("Aviso: o coeficiente de formato Akk (linha = coluna) precisará ser diferente de 0. \nPortanto, a enésima equação não deverá ter seu enésimo coeficiente sendo nulo.\n Insira as suas equações em uma ordem que satisfaça essa exigência.");
+
+                Console.WriteLine("Coloque suas equações no formato:\n A11.x + A12.y = A13\n A21.x + A22.y = A23");
                 
                 double[,] sistema = new double[numEquacoes, numEquacoes + 1];
 
@@ -128,7 +130,7 @@ namespace SistemaLinearELancamentoBalistico
 
                 double minRadianos = Math.Atan(h / x);
                 double minGraus = (minRadianos * 180) / Math.PI;
-                double angulo;
+                double anguloRadianos;
                 Console.WriteLine($"Baseando-se nas distâncias passadas, sabemos que o valor do ângulo deve ser \nmenor que (π/2) radianos = 90° \nmaior que: {minRadianos} OU radianos = {minGraus}°.");
 
                 Console.WriteLine("Digite 1 para digitar o ângulo em radianos e 2 para digitar o ângulo em graus: ");
@@ -140,9 +142,9 @@ namespace SistemaLinearELancamentoBalistico
                     {
                         Console.WriteLine("Digite o ângulo em radianos: ");
                         double tentativa = Convert.ToSingle(Console.ReadLine());
-                        if (minRadianos < tentativa && tentativa < Math.PI)
+                        if (minRadianos < tentativa && tentativa < (Math.PI/2))
                         {
-                            angulo = tentativa;
+                            anguloRadianos = tentativa;
                             break;
                         }
                         else
@@ -156,7 +158,7 @@ namespace SistemaLinearELancamentoBalistico
                         double tentativa = Convert.ToSingle(Console.ReadLine());
                         if (minGraus < tentativa && tentativa < 180)
                         {
-                            angulo = Math.PI * tentativa / 180;
+                            anguloRadianos = Math.PI * tentativa / 180;
                             break;
                         }
                         else
@@ -166,13 +168,13 @@ namespace SistemaLinearELancamentoBalistico
                     }
                 }
 
-                double t = Math.Sqrt(((x * Math.Sin(angulo) / Math.Cos(angulo)) - h) / (g/2));
+                double t = Math.Sqrt(((x * Math.Sin(anguloRadianos) / Math.Cos(anguloRadianos)) - h) / (g/2));
 
-                double v0 = x / (Math.Cos(angulo) * t);
+                double v0 = x / (Math.Cos(anguloRadianos) * t);
 
-                Console.WriteLine("A velocidade inicial necessária é {0} e sua duração de tempo para acontecer é {1}\n\nA equação que ilustra esse movimento é y = x*({2}) + x^2*({3})", t, v0, (Math.Sin(angulo) / Math.Cos(angulo)), (-g / (2 * v0 * v0 * Math.Cos(angulo) * Math.Cos(angulo))));
+                Console.WriteLine("A velocidade inicial necessária é {0} e sua duração de tempo para acontecer é {1}\n\nA equação que ilustra esse movimento é y = x*({2}) + x^2*({3})", t, v0, (Math.Sin(anguloRadianos) / Math.Cos(anguloRadianos)), (-g / (2 * v0 * v0 * Math.Cos(anguloRadianos) * Math.Cos(anguloRadianos))));
 
-                double v0y = v0 * Math.Sin(angulo);
+                double v0y = v0 * Math.Sin(anguloRadianos);
 
 
 
