@@ -5,7 +5,7 @@ Made in the second semester of Computer Engineering.
 
 ## Collaborators
 
-[Vítor Braghittoni](https://github.com/VBraghittoni), [Nicolas Birochi](https://github.com/nicholasbirochi), [Henrico Birochi](https://github.com/henricobirochi), and [Edgar Camacho](https://github.com/Edgarcsr) created this project.
+[Vítor Braghittoni](https://github.com/VBraghittoni), [Nicholas Birochi](https://github.com/nicholasbirochi), [Henrico Birochi](https://github.com/henricobirochi), and [Edgar Camacho](https://github.com/Edgarcsr) created this project.
 
 ## Physics: ballistic launch
 Given a target position and an angle of launch, the program calculates the needed initial velocity to reach it.
